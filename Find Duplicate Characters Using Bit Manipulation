@@ -1,0 +1,17 @@
+s = input()
+seen = 0
+duplicate = 0
+for ch in s:
+    pos = ord(ch) - ord('a')
+    bit = 1 << pos
+    if seen & bit:
+        duplicate = duplicate | bit
+    else:
+        seen = seen | bit
+printed = 0
+for ch in s:
+    pos = ord(ch) - ord('a')
+    bit = 1 << pos
+    if duplicate & bit and not (printed & bit):
+        print(ch, end=" ")
+        printed = printed ^ bit
