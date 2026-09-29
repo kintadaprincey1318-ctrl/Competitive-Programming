@@ -1,0 +1,37 @@
+V, N = map(int, input().split())
+
+arr = list(map(int, input().split()))
+
+coins = []
+for c in arr:
+    if c <= V:
+        coins.append(c)
+
+found = False
+
+for current_length in range(1, V + 1):
+    
+    all_combinations = [[]]
+
+    for step in range(current_length):
+        new_combinations = []
+        for path in all_combinations:
+            for coin in coins:
+                new_combinations.append(path + [coin])
+        all_combinations = new_combinations
+        
+    for path in all_combinations:
+        total_sum = 0
+        for coin in path:
+            total_sum += coin
+            
+        if total_sum == V:
+            print(len(path))
+            found = True
+            break
+            
+    if found:
+        break
+
+if not found:
+    print("-1")
