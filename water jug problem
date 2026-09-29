@@ -1,0 +1,11 @@
+inputs = raw_input().split()
+a = int(inputs[0])
+b = int(inputs[1])
+t = int(inputs[2])
+while b != 0:
+    a, b = b, a % b
+gcd = a
+if t % gcd == 0:
+    print("YES")
+else:
+    print("NO")
