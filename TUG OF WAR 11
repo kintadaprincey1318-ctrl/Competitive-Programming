@@ -1,0 +1,23 @@
+n = int(input())
+a = list(map(int, input().split()))
+total = sum(a)
+k = n // 2
+dp = [set() for _ in range(k + 1)]
+dp[0].add(0)
+for x in a:
+    for j in range(k, 0, -1):
+        for s in list(dp[j - 1]):
+            dp[j].add(s + x)
+ans = float('inf')
+for s in dp[k]:
+    ans = min(ans, abs(total - 2 * s))
+if n % 2 == 1:
+    dp = [set() for _ in range(k + 2)]
+    dp[0].add(0)
+    for x in a:
+        for j in range(k + 1, 0, -1):
+            for s in list(dp[j - 1]):
+                dp[j].add(s + x)
+    for s in dp[k + 1]:
+        ans = min(ans, abs(total - 2 * s))
+print(ans)
