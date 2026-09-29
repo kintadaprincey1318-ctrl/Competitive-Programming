@@ -1,0 +1,43 @@
+def find_path(graph, source, sink):
+    n = len(graph)
+    stack = [source]
+    parent = [-1] * n
+    visited = [False] * n
+    visited[source] = True
+    while stack:
+        u = stack.pop()
+        for v in range(n):
+            if graph[u][v] > 0 and not visited[v]:
+                visited[v] = True
+                parent[v] = u
+                stack.append(v)
+
+                if v == sink:
+                    return parent
+    return None
+def ford_fulkerson(graph, source, sink):
+    max_flow = 0
+    while True:
+        parent = find_path(graph, source, sink)
+        if parent is None:
+            break
+        flow = float('inf')
+        v = sink
+        while v != source:
+            u = parent[v]
+            flow = min(flow, graph[u][v])
+            v = u
+        v = sink
+        while v != source:
+            u = parent[v]
+            graph[u][v] -= flow
+            graph[v][u] += flow
+            v = u
+        max_flow += flow
+    return max_flow
+V, E = map(int, input().split())
+graph = [[0] * V for _ in range(V)]
+for _ in range(E):
+    u, v, capacity = map(int, input().split())
+    graph[u][v] += capacity
+print(ford_fulkerson(graph, 0, V - 1))
