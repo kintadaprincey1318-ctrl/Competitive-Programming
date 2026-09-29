@@ -1,0 +1,16 @@
+n = int(input())
+a = input().split(',')
+p = input()
+ans = []
+for word in a:
+    s = ""
+    for ch in word:
+        if ch.isupper():
+            s = s + ch
+    if s.startswith(p):
+        ans.append(word)
+if len(ans) == 0:
+    print("No match found")
+else:
+    for word in ans:
+        print(word)
