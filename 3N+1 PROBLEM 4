@@ -1,0 +1,14 @@
+inputs = input().split()
+i = int(inputs[0])
+j = int(inputs[1])
+maxC=0
+for k in range(i,j+1):  
+    count=1
+    while k != 1:
+        count+=1
+        if k % 2 == 0 :
+            k=k//2
+        else:
+            k = k * 3 + 1
+    maxC=max(count,maxC)
+print(i,j,maxC)
